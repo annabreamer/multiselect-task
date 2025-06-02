@@ -78,10 +78,10 @@
 
 .dropdown-menu {
   position: absolute;
-  margin-top: 4px;
   z-index: 1;
   width: 100%;
   max-height: 180px;
+  margin-top: 4px;
   border: 1px solid #ccc;
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -102,10 +102,6 @@
 
 .dropdown-menu li:hover {
   background-color: #f1f1f1;
-}
-
-.dropdown-menu li.selected {
-  background-color: #d0ebff;
 }
 
 .no-options {

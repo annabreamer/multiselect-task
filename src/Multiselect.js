@@ -31,16 +31,7 @@ export default function Multiselect({
   const toggleDropdown = () => setIsOpen((prev) => !prev);
 
   const handleSelect = (option) => {
-    const alreadySelected = selectedOptions.find(
-      (o) => o.value === option.value
-    );
-    if (alreadySelected) {
-      onSelectionChange(
-        selectedOptions.filter((o) => o.value !== option.value)
-      );
-    } else {
-      onSelectionChange([...selectedOptions, option]);
-    }
+    onSelectionChange([...selectedOptions, option]);
     setIsOpen(false);
     setSearch("");
   };
@@ -53,8 +44,10 @@ export default function Multiselect({
     onSelectionChange([]);
   };
 
-  const filteredOptions = options.filter((option) =>
-    option.label.toLowerCase().includes(search.toLowerCase())
+  const filteredOptions = options.filter(
+    (option) =>
+      option.label.toLowerCase().includes(search.toLowerCase()) &&
+      !selectedOptions.some((o) => o.value === option.value)
   );
 
   return (
@@ -107,15 +100,7 @@ export default function Multiselect({
             <ul>
               {filteredOptions.length > 0 ? (
                 filteredOptions.map((option) => (
-                  <li
-                    key={option.value}
-                    onClick={() => handleSelect(option)}
-                    className={
-                      selectedOptions.find((o) => o.value === option.value)
-                        ? "selected"
-                        : ""
-                    }
-                  >
+                  <li key={option.value} onClick={() => handleSelect(option)}>
                     {option.label}
                   </li>
                 ))
